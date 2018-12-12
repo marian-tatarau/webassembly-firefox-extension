@@ -1,0 +1,46 @@
+{
+  "manifest_version": 2,
+  "name": "Web page annotator",
+  "description": "Displays a sidebar that lets you take notes on web pages.",
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "54.0a1"
+    }
+  },
+
+  "sidebar_action": {
+    "default_icon": "icons/star.png",
+    "default_title" : "Annotator",
+    "default_panel": "sidebar/panel.html"
+  },
+
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": [
+      "wasm_exec.js",
+      "to_be_injected.js"
+    ]
+  }],
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "tabHide",
+    "webRequest"
+  ],
+
+  "web_accessible_resources": [
+    "to_be_injected.js",
+    "web.wasm"
+  ],
+
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      }
+    }
+  }
+}
